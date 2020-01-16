@@ -1,8 +1,7 @@
 defmodule Exgen.Util do
-
   def target_base(target_path) do
     target_path
-    |> Path.basename
+    |> Path.basename()
     |> String.replace("-", "_")
   end
 

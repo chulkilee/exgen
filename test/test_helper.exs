@@ -1,7 +1,6 @@
 ExUnit.start()
 
 defmodule MixHelper do
-
   import ExUnit.Assertions
   import Mix.Exgen
 
@@ -12,7 +11,7 @@ defmodule MixHelper do
   end
 
   def git_clone(url) do
-    tmp_dir = in_tmp fn -> System.cmd("git", ["clone", url, "exgen-test"]) end
+    tmp_dir = in_tmp(fn -> System.cmd("git", ["clone", url, "exgen-test"]) end)
     "#{tmp_dir}/exgen-test"
   end
 
