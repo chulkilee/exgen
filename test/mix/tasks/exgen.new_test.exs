@@ -2,7 +2,7 @@ defmodule Mix.Tasks.Exgen.NewTest do
   use ExUnit.Case
   import MixHelper
   import ExUnit.CaptureIO
-  import Mix.Exgen
+  import Exgen.Util
 
   setup do
     Mix.Task.clear()

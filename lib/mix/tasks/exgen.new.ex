@@ -1,6 +1,6 @@
 defmodule Mix.Tasks.Exgen.New do
   use Mix.Task
-  import Mix.Exgen
+  import Exgen.Util
   alias Exgen.Command
 
   @shortdoc "Generate a new project from a template"

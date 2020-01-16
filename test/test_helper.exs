@@ -2,7 +2,7 @@ ExUnit.start()
 
 defmodule MixHelper do
   import ExUnit.Assertions
-  import Mix.Exgen
+  import Exgen.Util
 
   def assert_rendered_template(template_path, rendered_path, context) do
     template = render(template_path, context)

@@ -1,6 +1,6 @@
-defmodule Mix.ExgenTest do
+defmodule Exgen.UtilTest do
   use ExUnit.Case, async: true
-  import Mix.Exgen
+  import Exgen.Util
 
   setup do: :ok
 

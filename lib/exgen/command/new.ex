@@ -1,5 +1,5 @@
 defmodule Exgen.Command.New do
-  import Mix.Exgen
+  import Exgen.Util
 
   def run(command) do
     command.template_path
