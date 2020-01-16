@@ -191,7 +191,7 @@ defmodule Mix.Tasks.Exgen.NewTest do
         "SomeApp"
       ]
 
-      {:ok, target, opts} = Mix.Tasks.Exgen.New.parse_args(args)
+      {:ok, _target, opts} = Mix.Tasks.Exgen.New.parse_args(args)
 
       expected_opts = [
         template: "https://github.com/rwdaigle/exgen-plug-simple.git",
