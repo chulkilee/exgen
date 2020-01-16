@@ -23,7 +23,7 @@ defmodule Exgen.Command do
   defp load_config(command) do
     cond do
       File.exists?(exfile_path = "#{command.template_path}/exgen.exs") ->
-        module = Kernel.ParallelCompiler.files([exfile_path]) |> Enum.at(0)
+        {:ok, [module | _], _} = Kernel.ParallelCompiler.compile([exfile_path])
         context = module.context(command) |> Keyword.merge(command.context)
         %{command | module: module, context: context}
 
