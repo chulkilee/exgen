@@ -1,7 +1,6 @@
 defmodule Exgen.Command do
   defstruct module: nil, template_path: nil, target_path: ".", context: []
   alias Exgen.Command
-  import Mix.Exgen
 
   def load(template_path, target_path, opts \\ []) do
     cond do
