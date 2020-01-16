@@ -27,10 +27,6 @@ defmodule ExGen.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [
-      {:cowboy, "~> 1.0", only: [:dev, :test]},
-      {:plug, "~> 1.0", only: [:dev, :test]},
-      {:poison, "~> 2.2.0", only: [:dev, :test]}
-    ]
+    []
   end
 end
