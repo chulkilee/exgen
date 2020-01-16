@@ -15,6 +15,9 @@ defmodule Mix.Tasks.Exgen.New do
          {:ok, template_path} <- resolve_template(opts[:template]),
          {:ok, command} <- Command.load(template_path, target, opts) do
       command |> Command.New.run()
+    else
+      {:error, error} when is_binary(error) -> Mix.shell().error(error)
+      {:error, error} -> Mix.shell().error(inspect(error))
     end
   end
 
