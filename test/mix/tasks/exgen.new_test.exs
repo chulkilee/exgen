@@ -139,6 +139,38 @@ defmodule Mix.Tasks.Exgen.NewTest do
         )
       end)
     end
+
+    test "Generates app with subdir", %{url: url, template: template} do
+      in_tmp(fn ->
+        capture_io(fn ->
+          Mix.Tasks.Exgen.New.run([
+            "some_app",
+            "-t",
+            url,
+            "--template-subdir",
+            "lib",
+            "--app-name",
+            "some_app",
+            "--module",
+            "SomeApp"
+          ])
+        end)
+
+        expected_context = [app_name: "some_app", module: "SomeApp"]
+
+        assert_rendered_template(
+          "#{template}/lib/<%= app_name %>.ex",
+          "some_app/some_app.ex",
+          expected_context
+        )
+
+        assert_rendered_template(
+          "#{template}/lib/<%= app_name %>/router.ex",
+          "some_app/some_app/router.ex",
+          expected_context
+        )
+      end)
+    end
   end
 
   describe "exgen.new from HTTP git repo" do

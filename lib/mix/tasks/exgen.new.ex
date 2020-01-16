@@ -12,7 +12,7 @@ defmodule Mix.Tasks.Exgen.New do
   """
   def run(args) do
     with {:ok, target, opts} <- parse_args(args),
-         {:ok, template_path} <- resolve_template(opts[:template]),
+         {:ok, template_path} <- resolve_template(opts),
          {:ok, command} <- Command.load(template_path, target, opts) do
       command |> Command.New.run()
     else
@@ -22,11 +22,9 @@ defmodule Mix.Tasks.Exgen.New do
   end
 
   def parse_args(args) do
-    switches = [template: :string]
-
     {opts, args, _} =
       OptionParser.parse(args,
-        switches: switches,
+        switches: [template: :string, template_subdir: :string],
         aliases: [t: :template],
         allow_nonexistent_atoms: true
       )
@@ -38,11 +36,14 @@ defmodule Mix.Tasks.Exgen.New do
     {:ok, target, opts}
   end
 
-  defp resolve_template(template) do
+  defp resolve_template(opts) do
+    template = Keyword.fetch!(opts, :template)
+    template_subdir = Keyword.get(opts, :template_subdir, "")
+
     cond do
       String.ends_with?(template, ".git") ->
         tmp_dir = in_tmp(fn -> System.cmd("git", ["clone", template, "exgen"]) end)
-        {:ok, "#{tmp_dir}/exgen"}
+        {:ok, Path.join([tmp_dir, "exgen", template_subdir])}
 
       true ->
         {:ok, template}
