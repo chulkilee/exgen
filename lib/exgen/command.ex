@@ -16,7 +16,7 @@ defmodule Exgen.Command do
         {:ok, command}
 
       true ->
-        {:err, "Could not find #{template_path}"}
+        {:error, "Could not find #{template_path}"}
     end
   end
 

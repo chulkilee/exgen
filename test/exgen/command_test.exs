@@ -44,7 +44,7 @@ defmodule Exgen.ExfileTest do
   end
 
   test "load w/ bad path" do
-    {:err, msg} = Command.load(Path.expand("nothingness", __DIR__), "../some-app")
+    {:error, msg} = Command.load(Path.expand("nothingness", __DIR__), "../some-app")
     assert msg == "Could not find #{Path.expand("nothingness", __DIR__)}"
   end
 end
