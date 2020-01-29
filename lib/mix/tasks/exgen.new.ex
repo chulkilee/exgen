@@ -46,7 +46,7 @@ defmodule Mix.Tasks.Exgen.New do
         {:ok, Path.join([tmp_dir, "exgen", template_subdir])}
 
       true ->
-        {:ok, template}
+        {:ok, Path.join([template, template_subdir])}
     end
   end
 end

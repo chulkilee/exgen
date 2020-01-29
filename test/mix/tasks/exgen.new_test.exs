@@ -45,6 +45,38 @@ defmodule Mix.Tasks.Exgen.NewTest do
       end)
     end
 
+    test "generates app in current dir with subdir", %{template: template} do
+      in_tmp(fn ->
+        capture_io(fn ->
+          Mix.Tasks.Exgen.New.run([
+            "some_app",
+            "-t",
+            template,
+            "--template-subdir",
+            "lib",
+            "--app-name",
+            "some_app",
+            "--module",
+            "SomeApp"
+          ])
+        end)
+
+        context = [app_name: "some_app", module: "SomeApp"]
+
+        assert_rendered_template(
+          "#{template}/lib/<%= app_name %>.ex",
+          "some_app/some_app.ex",
+          context
+        )
+
+        assert_rendered_template(
+          "#{template}/lib/<%= app_name %>/router.ex",
+          "some_app/some_app/router.ex",
+          context
+        )
+      end)
+    end
+
     test "generates app in relative dir", %{template: template} do
       in_tmp(fn ->
         capture_io(fn ->
